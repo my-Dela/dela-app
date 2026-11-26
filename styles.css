@@ -1,0 +1,454 @@
+:root {
+  --dela-blue: #0d00a4;
+  --dela-blue-dark: #08006e;
+  --dela-red: #d90429;
+  --bg-page: #f1f5f9;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --success: #059669;
+  --radius: 12px;
+  --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+.hidden { display: none !important; }
+
+/* Banner Luar Talian */
+.network-banner {
+  background: #b45309;
+  color: #fff;
+  text-align: center;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Skrin Log Masuk */
+.login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: 0 12px 32px rgba(13, 0, 164, 0.08);
+  border: 1px solid var(--border-color);
+}
+
+.brand-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dela-logo-mark {
+  font-size: 2.6rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.dela-text { color: var(--dela-blue); }
+.dela-pen {
+  font-size: 1.8rem;
+  margin: 0 2px;
+  filter: hue-rotate(320deg);
+}
+
+.brand-tagline {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+
+.school-preview-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+}
+
+.school-preview-badge img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.school-preview-badge strong {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--text-main);
+}
+
+.school-preview-badge small {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* Borang & Butang */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #334155;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--dela-blue);
+  box-shadow: 0 0 0 3px rgba(13, 0, 164, 0.12);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--dela-blue);
+  color: #fff;
+}
+
+.btn-primary:hover { background: var(--dela-blue-dark); }
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: var(--text-main);
+}
+
+.btn-outline:hover { background: #f1f5f9; }
+.btn-full { width: 100%; }
+
+.login-footer {
+  text-align: center;
+  margin-top: 18px;
+  color: var(--text-muted);
+}
+
+/* Susun Atur Utama (Laptop & Tablet) */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background: #ffffff;
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 16px;
+  transition: width 0.25s ease;
+}
+
+.sidebar.collapsed { width: 78px; }
+.sidebar.collapsed .nav-item span,
+.sidebar.collapsed .badge-skm { display: none; }
+
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.dela-mini {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--dela-blue);
+}
+
+.accent-red { color: var(--dela-red); }
+
+.badge-skm {
+  background: #fee2e2;
+  color: var(--dela-red);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  margin-left: 6px;
+}
+
+.icon-btn {
+  background: #f1f5f9;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  color: #334155;
+  font-size: 0.93rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+}
+
+.nav-item:hover { background: #f1f5f9; }
+.nav-item.active {
+  background: #eef2ff;
+  color: var(--dela-blue);
+  font-weight: 700;
+}
+
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Header Sub-Jenama Sekolah */
+.topbar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-color);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.school-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.school-logo-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #eef2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.school-logo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.school-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.school-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.user-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+}
+
+.role-badge {
+  background: var(--dela-blue);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.72rem;
+}
+
+/* Kandungan & Kad KPI */
+.content-area {
+  padding: 24px;
+  flex: 1;
+}
+
+.welcome-banner {
+  background: linear-gradient(120deg, var(--dela-blue) 0%, #1e1b4b 100%);
+  color: #fff;
+  padding: 22px 24px;
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.device-indicator {
+  background: rgba(255, 255, 255, 0.16);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.kpi-card, .panel-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.kpi-label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.kpi-value {
+  display: block;
+  font-size: 1.3rem;
+  margin: 8px 0 4px;
+}
+
+.text-success { color: var(--success); }
+.muted { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; }
+
+.info-box {
+  margin-top: 14px;
+  padding: 14px;
+  background: #f8fafc;
+  border-left: 4px solid var(--dela-red);
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* Grid Tetapan Sub-Jenama */
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.full-span { grid-column: 1 / -1; }
+.settings-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Navigasi Bawah Telefon Pintar */
+.mobile-bottom-nav { display: none; }
+
+/* RESPONSIF: TABLET (768px - 1024px) */
+@media (max-width: 1024px) {
+  .sidebar { width: 210px; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* RESPONSIF: TELEFON PINTAR (< 768px) */
+@media (max-width: 767px) {
+  .sidebar, .desktop-only, .user-email-label { display: none !important; }
+  .content-area { padding: 16px 16px 88px; }
+  .kpi-grid, .settings-grid { grid-template-columns: 1fr; }
+
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
+    z-index: 50;
+  }
+
+  .m-nav-item {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .m-nav-item span { font-size: 0.72rem; font-weight: 600; }
+  .m-nav-item.active { color: var(--dela-blue); }
+}
