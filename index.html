@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d00a4" />
+  <title>Dela — Sistem Pengurusan Sekolah Bersepadu</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <!-- PENUNJUK STATUS SAMBUNGAN (OFFLINE / ONLINE) -->
+  <div id="networkBanner" class="network-banner hidden" role="status">
+    Mod Luar Talian Aktif — Data disimpan secara tempatan dan akan disegerakkan secara automatik.
+  </div>
+
+  <!-- SKRIN 1: LOG MASUK PENGGUNA -->
+  <main id="loginView" class="login-screen">
+    <div class="login-card">
+      <div class="brand-header">
+        <!-- Logo SVG berinspirasikan logo rasmi Dela -->
+        <div class="dela-logo-mark" aria-label="Logo Dela">
+          <span class="dela-text">De</span><span class="dela-pen">✒️</span><span class="dela-text">a</span>
+        </div>
+        <p class="brand-tagline">Sistem Pengurusan Sekolah &amp; eRPH Bersepadu</p>
+      </div>
+
+      <div id="schoolLoginPreview" class="school-preview-badge">
+        <img id="loginSchoolLogo" src="" alt="Logo Sekolah" class="hidden" />
+        <div>
+          <strong id="loginSchoolName">Sekolah Kebangsaan Contoh (SKM)</strong>
+          <small id="loginSchoolMotto">Ilmu Teras Kecemerlangan</small>
+        </div>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="userEmail">E-mel Rasmi (DELIMa / Google)</label>
+          <input type="email" id="userEmail" placeholder="contoh: g-12345678@moe-dl.edu.my" required />
+        </div>
+
+        <div class="form-group">
+          <label for="userRole">Peranan Akses (RBAC)</label>
+          <select id="userRole" required>
+            <option value="GURU">Guru Akademik / Guru Kelas Bercantum</option>
+            <option value="PENTADBIR">Pentadbir (Guru Besar / GPK)</option>
+            <option value="AKP">Anggota Kumpulan Pelaksana (AKP)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="schoolMode">Struktur Sekolah</label>
+          <select id="schoolMode">
+            <option value="SKM">Sekolah Kurang Murid (SKM / Kelas Bercantum)</option>
+            <option value="PERDANA">Sekolah Aliran Perdana</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">
+          Log Masuk ke Dela
+        </button>
+      </form>
+
+      <div class="login-footer">
+        <small>Mematuhi Kawalan Privasi PDPA • Kos Sifar Ekosistem Google</small>
+      </div>
+    </div>
+  </main>
+
+  <!-- SKRIN 2: APLIKASI UTAMA (DASHBOARD ADAPTIF) -->
+  <div id="appShell" class="app-shell hidden">
+    <!-- SIDEBAR (Laptop / Tablet Landscape) -->
+    <aside id="sidebar" class="sidebar" aria-label="Navigasi Utama">
+      <div class="sidebar-top">
+        <div class="sidebar-brand">
+          <span class="dela-mini">De<span class="accent-red">/</span>a</span>
+          <span class="badge-skm" id="sidebarModeBadge">SKM</span>
+        </div>
+        <button id="toggleSidebarBtn" class="icon-btn desktop-only" title="Kecilkan Menu">☰</button>
+      </div>
+
+      <nav class="nav-list" id="desktopNav">
+        <button class="nav-item active" data-tab="dashboard">📊 <span>Papan Pemuka</span></button>
+        <button class="nav-item" data-tab="erph" data-roles="GURU,PENTADBIR">📘 <span>eRPH &amp; Kelas Bercantum</span></button>
+        <button class="nav-item" data-tab="murid" data-roles="GURU,PENTADBIR,AKP">🎓 <span>Data Murid (PDPA)</span></button>
+        <button class="nav-item" data-tab="pentadbiran" data-roles="PENTADBIR,AKP">🗂️ <span>Operasi &amp; AKP</span></button>
+        <button class="nav-item" data-tab="tetapan" data-roles="PENTADBIR">⚙️ <span>Tetapan Sub-Jenama</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button id="logoutBtn" class="btn btn-outline btn-full">Log Keluar</button>
+      </div>
+    </aside>
+
+    <!-- KANDUNGAN UTAMA -->
+    <div class="main-wrapper">
+      <!-- HEADER SUB-JENAMA SEKOLAH -->
+      <header class="topbar">
+        <div class="school-identity">
+          <div id="headerLogoBox" class="school-logo-box">🏫</div>
+          <div>
+            <h1 id="headerSchoolName" class="school-title">Sekolah Kebangsaan Contoh</h1>
+            <p class="school-subtitle">
+              <span id="headerSchoolCode">KOD: CBA0001</span> • 
+              <span id="headerSchoolMotto">Ilmu Teras Kecemerlangan</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="user-pill">
+          <span id="activeRoleBadge" class="role-badge">GURU</span>
+          <span id="activeUserEmail" class="user-email-label">guru@moe-dl.edu.my</span>
+        </div>
+      </header>
+
+      <!-- RUANG KANDUNGAN DINAMIK -->
+      <section id="contentArea" class="content-area">
+        <!-- TAB 1: PAPAN PEMUKA -->
+        <div id="tab-dashboard" class="tab-panel active">
+          <div class="welcome-banner">
+            <div>
+              <h2>Selamat Datang ke Dela</h2>
+              <p id="welcomeContextText">Paparan dioptimumkan untuk pengurusan harian warga sekolah.</p>
+            </div>
+            <span class="device-indicator" id="deviceIndicator">Paparan: Auto</span>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-label">Status Minggu Persekolahan</span>
+              <strong class="kpi-value">Minggu 38</strong>
+              <small>Sesi Akademik Semasa</small>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Mod Struktur Kelas</span>
+              <strong class="kpi-value" id="kpiClassMode">Kelas Bercantum (SKM)</strong>
+              <small>Sokongan RPH multi-tahun aktif</small>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Keselamatan Data (PDPA)</span>
+              <strong class="kpi-value text-success">Dilindungi (RBAC)</strong>
+              <small>Akses terhad mengikut peranan</small>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Modul Aktif Sedia Ada</span>
+              <strong class="kpi-value">4 / 32 Modul</strong>
+              <small>Fasa Sesi 1: Teras &amp; Penjenamaan</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: PRATONTON MODUL eRPH & KELAS BERCANTUM -->
+        <div id="tab-erph" class="tab-panel hidden">
+          <div class="panel-card">
+            <h3>Modul eRPH &amp; Sokongan Kelas Bercantum (SKM)</h3>
+            <p>Struktur pangkalan data telah sedia menyokong gabungan dua tahun persekolahan dalam satu jadual waktu tanpa pertindihan rekod murid.</p>
+            <div class="info-box">
+              <strong>Sedia untuk Sesi 2:</strong> Borang RPH pintar, bank DSKP/RPT, dan semakan penghantaran pentadbir akan dibina di ruang ini.
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: DATA MURID -->
+        <div id="tab-murid" class="tab-panel hidden">
+          <div class="panel-card">
+            <h3>Direktori Murid &amp; Kawalan Privasi (PDPA)</h3>
+            <p>Medan sensitif seperti nombor MyKid/KP dan maklumat keluarga dilindungi dengan kawalan akses berasaskan peranan.</p>
+          </div>
+        </div>
+
+        <!-- TAB 4: OPERASI & AKP -->
+        <div id="tab-pentadbiran" class="tab-panel hidden">
+          <div class="panel-card">
+            <h3>Ruang Kerja Pentadbir &amp; Anggota Kumpulan Pelaksana (AKP)</h3>
+            <p>Pengurusan surat-menyurat, inventori sekolah, rekod kehadiran staf, dan pelaporan kewangan/aset sekolah.</p>
+          </div>
+        </div>
+
+        <!-- TAB 5: TETAPAN SUB-JENAMA SEKOLAH (MODUL 26) -->
+        <div id="tab-tetapan" class="tab-panel hidden">
+          <div class="panel-card">
+            <h3>Modul 26: Tetapan Identiti &amp; Sub-Jenama Sekolah</h3>
+            <p class="muted">Sesuaikan nama rasmi, kod sekolah, cogan kata, dan logo sekolah anda di bawah ekosistem <strong>Dela</strong>. Perubahan dipaparkan serta-merta pada header dan cetakan rasmi.</p>
+
+            <form id="brandingForm" class="settings-grid">
+              <div class="form-group">
+                <label for="inputSchoolName">Nama Rasmi Sekolah</label>
+                <input type="text" id="inputSchoolName" placeholder="Contoh: Sekolah Kebangsaan Seri Makmur" required />
+              </div>
+
+              <div class="form-group">
+                <label for="inputSchoolCode">Kod Sekolah</label>
+                <input type="text" id="inputSchoolCode" placeholder="Contoh: ABA1234" required />
+              </div>
+
+              <div class="form-group full-span">
+                <label for="inputSchoolMotto">Cogan Kata / Slogan Sekolah</label>
+                <input type="text" id="inputSchoolMotto" placeholder="Contoh: Berilmu, Berakhlak, Berbakti" />
+              </div>
+
+              <div class="form-group full-span">
+                <label for="inputSchoolLogo">Muat Naik Logo Sekolah (PNG/JPG Lutsinar disyorkan)</label>
+                <input type="file" id="inputSchoolLogo" accept="image/*" />
+                <small class="muted">Disimpan secara selamat untuk kegunaan lencana header sekolah.</small>
+              </div>
+
+              <div class="settings-actions full-span">
+                <button type="submit" class="btn btn-primary">Simpan Tetapan Sekolah</button>
+                <button type="button" id="resetBrandingBtn" class="btn btn-outline">Set Semula Asal</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- NAVIGASI BAWAH (Khusus Telefon Pintar < 768px) -->
+    <nav class="mobile-bottom-nav" id="mobileNav" aria-label="Navigasi Telefon">
+      <button class="m-nav-item active" data-tab="dashboard">📊<span>Utama</span></button>
+      <button class="m-nav-item" data-tab="erph" data-roles="GURU,PENTADBIR">📘<span>eRPH</span></button>
+      <button class="m-nav-item" data-tab="murid" data-roles="GURU,PENTADBIR,AKP">🎓<span>Murid</span></button>
+      <button class="m-nav-item" data-tab="pentadbiran" data-roles="PENTADBIR,AKP">🗂️<span>AKP</span></button>
+      <button class="m-nav-item" data-tab="tetapan" data-roles="PENTADBIR">⚙️<span>Tetapan</span></button>
+    </nav>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
